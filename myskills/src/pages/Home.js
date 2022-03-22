@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TextInput,
   Platform,
+  FlatList,
 } from "react-native";
 
 import { Button } from "../components/Button";
@@ -28,13 +29,18 @@ export function Home() {
         onChangeText={setNewSkill}
       />
 
-      <Button onPress={handleAddNewSkill}/>
+      <Button onPress={handleAddNewSkill} />
 
       <Text style={[styles.title, { marginVertical: 50 }]}>My skills</Text>
 
-      {mySkills.map(skill => (
-          <SkillCard skill={skill}/>
-      ))}
+
+
+      {/* //Para listas pequenas pode se usar ScrollView. */}
+      <FlatList
+        data={mySkills}
+        keyExtractor={(item, index) => index }
+        renderItem={({ item }) => <SkillCard skill={item} />}
+      />
 
     </View>
   );
@@ -44,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#121015",
-    paddingVertical: 70,
+    paddingTop: 50,
     paddingHorizontal: 30,
   },
   title: {
