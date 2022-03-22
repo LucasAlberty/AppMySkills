@@ -20,6 +20,7 @@ export function Home() {
     setMySkills((oldState) => [...oldState, newSkill]);
   }
 
+  //Primeiro parametro 
   useEffect(() => {
     const currentHours = new Date().getHours();
     console.log(currentHours)
@@ -31,7 +32,7 @@ export function Home() {
       setGrenttig('Good Evening!')
     }
 
-  }, [mySkills]);
+  }, []); 
 
   return (
     <View style={styles.container}>
