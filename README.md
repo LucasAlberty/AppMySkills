@@ -1,3 +1,3 @@
-# React-Native
+# App MySkill
 
-Estou desenvolvendo este projeto para treinar os fundamentos do React Native. Aplicação simples que o usuário adiciona suas habilidade a uma lista pessoal.
+Aplicativo simples em que o usuário adiciona as skills que possui. Um desenvolvimento simples com intuito de solidificar meu conhecimento nos fundamentos em React Native.
