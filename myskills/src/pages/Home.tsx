@@ -28,8 +28,8 @@ export function Home() {
       id: String(new Date().getTime()),
       name: newSkill
     }
-    
     setMySkills(oldState => [...oldState, data]);
+    
   }
 
   //Primeiro parametro 
@@ -59,7 +59,7 @@ export function Home() {
         onChangeText={setNewSkill}
       />
 
-      <Button onPress={handleAddNewSkill} />
+      <Button title='Add' onPress={handleAddNewSkill} />
 
       <Text style={[styles.title, { marginVertical: 50 }]}>My skills</Text>
 
