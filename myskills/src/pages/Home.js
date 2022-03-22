@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -14,14 +14,31 @@ import { SkillCard } from "../components/SkillCard";
 export function Home() {
   const [newSkill, setNewSkill] = useState("");
   const [mySkills, setMySkills] = useState([]);
+  const [grenttig, setGrenttig] = useState('')
 
   function handleAddNewSkill() {
     setMySkills((oldState) => [...oldState, newSkill]);
   }
 
+  useEffect(() => {
+    const currentHours = new Date().getHours();
+    console.log(currentHours)
+    if(currentHours < 12){
+      setGrenttig('Good Morning!')
+    }else if(currentHours >= 12 && currentHours < 18){
+      setGrenttig('Good Afternoon!')
+    }else{
+      setGrenttig('Good Evening!')
+    }
+
+  }, [mySkills]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome Lucas!</Text>
+
+      <Text style={styles.grenttigs}>{grenttig}</Text>
+
       <TextInput
         style={styles.input}
         placeholder="New skill"
@@ -33,15 +50,12 @@ export function Home() {
 
       <Text style={[styles.title, { marginVertical: 50 }]}>My skills</Text>
 
-
-
-      {/* //Para listas pequenas pode se usar ScrollView. */}
+      {/* Para listas pequenas pode se usar ScrollView. */}
       <FlatList
         data={mySkills}
-        keyExtractor={(item, index) => index }
+        keyExtractor={(item, index) => index}
         renderItem={({ item }) => <SkillCard skill={item} />}
       />
-
     </View>
   );
 }
@@ -66,4 +80,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 7,
   },
+  grenttigs: {
+    color: '#fff',
+  }
 });
