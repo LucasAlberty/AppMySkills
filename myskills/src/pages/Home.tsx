@@ -11,28 +11,45 @@ import {
 import { Button } from "../components/Button";
 import { SkillCard } from "../components/SkillCard";
 
+interface SkillData {
+  id: string;
+  name: string;
+  date?: Date;
+}
+
+
 export function Home() {
   const [newSkill, setNewSkill] = useState("");
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
   const [grenttig, setGrenttig] = useState('')
 
   function handleAddNewSkill() {
-    setMySkills((oldState) => [...oldState, newSkill]);
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill
+    }
+    setMySkills(oldState => [...oldState, data]);
+  }
+
+  function handleRemoveSkill(id: string) {
+    setMySkills(oldState => oldState.filter(
+      skill => skill.id !== id
+    ))
   }
 
   //Primeiro parametro 
   useEffect(() => {
     const currentHours = new Date().getHours();
     console.log(currentHours)
-    if(currentHours < 12){
+    if (currentHours < 12) {
       setGrenttig('Good Morning!')
-    }else if(currentHours >= 12 && currentHours < 18){
+    } else if (currentHours >= 12 && currentHours < 18) {
       setGrenttig('Good Afternoon!')
-    }else{
+    } else {
       setGrenttig('Good Evening!')
     }
 
-  }, []); 
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -47,15 +64,19 @@ export function Home() {
         onChangeText={setNewSkill}
       />
 
-      <Button onPress={handleAddNewSkill} />
+      <Button title='Add' onPress={handleAddNewSkill} />
 
       <Text style={[styles.title, { marginVertical: 50 }]}>My skills</Text>
 
       {/* Para listas pequenas pode se usar ScrollView. */}
       <FlatList
         data={mySkills}
-        keyExtractor={(item, index) => index}
-        renderItem={({ item }) => <SkillCard skill={item} />}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => 
+          <SkillCard
+            skill={item.name}
+            onLongPress={() => handleRemoveSkill(item.id)} 
+          />}
       />
     </View>
   );
