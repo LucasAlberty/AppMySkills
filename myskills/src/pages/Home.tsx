@@ -29,22 +29,27 @@ export function Home() {
       name: newSkill
     }
     setMySkills(oldState => [...oldState, data]);
-    
+  }
+
+  function handleRemoveSkill(id: string) {
+    setMySkills(oldState => oldState.filter(
+      skill => skill.id !== id
+    ))
   }
 
   //Primeiro parametro 
   useEffect(() => {
     const currentHours = new Date().getHours();
     console.log(currentHours)
-    if(currentHours < 12){
+    if (currentHours < 12) {
       setGrenttig('Good Morning!')
-    }else if(currentHours >= 12 && currentHours < 18){
+    } else if (currentHours >= 12 && currentHours < 18) {
       setGrenttig('Good Afternoon!')
-    }else{
+    } else {
       setGrenttig('Good Evening!')
     }
 
-  }, []); 
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -67,7 +72,11 @@ export function Home() {
       <FlatList
         data={mySkills}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <SkillCard skill={item.name} />}
+        renderItem={({ item }) => 
+          <SkillCard
+            skill={item.name}
+            onLongPress={() => handleRemoveSkill(item.id)} 
+          />}
       />
     </View>
   );
