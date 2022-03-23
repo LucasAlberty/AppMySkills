@@ -1,6 +1,6 @@
 # App MySkill
 
-> Aplicativo simples em que o usuário adiciona as skills que possui, caso queira pode ser removovida com um toque. Um projeto simples usando com intuito de solidificar meu conhecimento nos fundamentos em React Native.
+> Aplicativo simples em que o usuário adiciona as skills que possui, caso queira pode ser removovida mantendo pressionado. Um projeto simples usando com intuito de solidificar meu conhecimento nos fundamentos em React Native.
 #
 
 
